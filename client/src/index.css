@@ -10,6 +10,8 @@
     }
 }
 
+
+
 @layer utilities {
 
     .btn-bounce {
@@ -23,5 +25,23 @@
         background-clip: text;
         color: transparent;
     }
+}
+
+@layer base {
+    * {
+        margin: 0px;
+        padding: 0px;
+        font-family: Arial;
+    }
+
+    h1,span {
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 18px;
+    }
+   
 }
 

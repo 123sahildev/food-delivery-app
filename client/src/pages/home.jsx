@@ -3,41 +3,15 @@ import Hero from '../assets/hero2.jpg'
 import Header from "../components/header.jsx"
 import Hero2 from '../assets/hero3.jpg'
 import Hero3 from '../assets/hero4.jpg'
-
+import Register from '../forms/register.jsx';
 
 export default function home() {
+    const [login, setLogin] = useState(true);
+    const [register, setRegister] = useState(true);
     const word = 'Fresh Food, Delivered Fast Order your favorite meals anytime'
     const [title, setTitle] = useState('Fresh Food, Delivered Fast Order your favorite meals anytime');
     const [isanimation, setAnimation] = useState(true);
 
-
-
-
-    const stopAnimation = () => {
-      setAnimation()
-    }
-  // useEffect(() => {
-  //   let index = 0;
-  
-  //   let intervel = setInterval(() => {
-  //     setTitle(prev => prev + word[index]);
-  //     index++;
-      
-  //   }, 100);
-
-  //   if (index === word.length) {
-  //     console.log("chal raha haun main");
-      
-  //     return () => {
-  //       clearInterval(intervel);
-  //     }
-  //   }
-
-  //   return () => {
-  //     clearInterval(intervel);
-  //   };
-
-  // }, []);
 
   return (
     <>
@@ -47,6 +21,7 @@ export default function home() {
       <button onMouseEnter={() => setAnimation(false)} onMouseLeave={() => setAnimation(true)} className={`${isanimation && "btn-bounce "} border-none font-[Arial] font-bold cursor-pointer outline-none text-[17px] text-white bg-[#ff7b00] h-9 rounded-[7px] mt-2 px-3`}>order now</button>
     </div>
     <Header />
+    {register &&  <Register />}
     </>
   )
 }

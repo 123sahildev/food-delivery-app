@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import Logo from '../assets/logo.jsx'
-import Cart from '../assets/icons/cart.jsx'
-import Search from "../assets/icons/search.jsx";
+import Cart from '../assets/svgs/cart.jsx'
+import Search from "../assets/svgs/search.jsx";
 export default function header() {
 
 
