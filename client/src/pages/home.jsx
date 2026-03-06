@@ -7,10 +7,11 @@ import Register from '../forms/register.jsx';
 
 export default function home() {
     const [login, setLogin] = useState(true);
-    const [register, setRegister] = useState(true);
+    const [register, setRegister] = useState(false);
     const word = 'Fresh Food, Delivered Fast Order your favorite meals anytime'
     const [title, setTitle] = useState('Fresh Food, Delivered Fast Order your favorite meals anytime');
     const [isanimation, setAnimation] = useState(true);
+
 
 
   return (
@@ -20,8 +21,8 @@ export default function home() {
       <h1 className="font-[system-ui] font-bold gridentText w-150 text-[40px] ">{title}|</h1>
       <button onMouseEnter={() => setAnimation(false)} onMouseLeave={() => setAnimation(true)} className={`${isanimation && "btn-bounce "} border-none font-[Arial] font-bold cursor-pointer outline-none text-[17px] text-white bg-[#ff7b00] h-9 rounded-[7px] mt-2 px-3`}>order now</button>
     </div>
-    <Header />
-    {register &&  <Register />}
+    <Header setRegister={setRegister}/>
+    {register &&  <Register setRegister={setRegister} />}
     </>
   )
 }
