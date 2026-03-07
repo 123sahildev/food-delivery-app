@@ -12,8 +12,8 @@ export default function Logo(props) {
         <path d="M13.929 8.20667C13.911 8.13982 13.8845 8.08094 13.8494 8.03C13.8144 7.97801 13.7715 7.93398 13.7205 7.8979C13.6696 7.86183 13.6112 7.83477 13.5454 7.81673C13.4797 7.79763 13.4075 7.78808 13.329 7.78808C13.1709 7.78808 13.034 7.82628 12.9184 7.90268C12.8038 7.97907 12.7152 8.09049 12.6526 8.23691C12.59 8.38228 12.5587 8.55895 12.5587 8.76692C12.5587 8.97595 12.5889 9.15421 12.6494 9.30169C12.7099 9.44918 12.7974 9.56165 12.912 9.63911C13.0266 9.71657 13.1656 9.7553 13.329 9.7553C13.4733 9.7553 13.5953 9.73196 13.6951 9.68527C13.7959 9.63752 13.8723 9.57014 13.9242 9.48314C13.9762 9.39613 14.0022 9.29374 14.0022 9.17596L14.1487 9.19346H13.356V8.6189H14.7614V9.05022C14.7614 9.34201 14.6994 9.5919 14.5752 9.79986C14.4521 10.0078 14.2824 10.1675 14.0659 10.2789C13.8505 10.3903 13.6027 10.4461 13.3226 10.4461C13.0117 10.4461 12.7385 10.3787 12.5029 10.2439C12.2674 10.1092 12.0838 9.91711 11.9523 9.66776C11.8207 9.41735 11.7549 9.12025 11.7549 8.77647C11.7549 8.50908 11.7947 8.27193 11.8743 8.06502C11.9538 7.85705 12.0647 7.68091 12.2069 7.53661C12.3502 7.3923 12.5157 7.28301 12.7035 7.20874C12.8924 7.13446 13.0956 7.09733 13.3131 7.09733C13.5019 7.09733 13.6775 7.12438 13.8399 7.1785C14.0033 7.23261 14.1476 7.30901 14.2728 7.40769C14.3991 7.50637 14.5015 7.62362 14.58 7.75943C14.6585 7.89525 14.7073 8.04433 14.7264 8.20667H13.929ZM16.367 10.4476C16.1102 10.4476 15.8895 10.3951 15.7049 10.2901C15.5213 10.184 15.3796 10.0365 15.2799 9.84761C15.1812 9.65768 15.1319 9.43751 15.1319 9.1871C15.1319 8.93563 15.1812 8.71545 15.2799 8.52658C15.3796 8.33665 15.5213 8.18916 15.7049 8.08412C15.8895 7.97801 16.1102 7.92496 16.367 7.92496C16.6237 7.92496 16.8439 7.97801 17.0275 8.08412C17.2121 8.18916 17.3537 8.33665 17.4524 8.52658C17.5522 8.71545 17.602 8.93563 17.602 9.1871C17.602 9.43751 17.5522 9.65768 17.4524 9.84761C17.3537 10.0365 17.2121 10.184 17.0275 10.2901C16.8439 10.3951 16.6237 10.4476 16.367 10.4476ZM16.3717 9.86035C16.4651 9.86035 16.5442 9.8317 16.6089 9.7744C16.6736 9.7171 16.7229 9.63752 16.7569 9.53566C16.7919 9.4338 16.8094 9.31602 16.8094 9.18232C16.8094 9.04651 16.7919 8.92767 16.7569 8.8258C16.7229 8.72394 16.6736 8.64436 16.6089 8.58706C16.5442 8.52977 16.4651 8.50112 16.3717 8.50112C16.2752 8.50112 16.1935 8.52977 16.1266 8.58706C16.0608 8.64436 16.0104 8.72394 15.9754 8.8258C15.9415 8.92767 15.9245 9.04651 15.9245 9.18232C15.9245 9.31602 15.9415 9.4338 15.9754 9.53566C16.0104 9.63752 16.0608 9.7171 16.1266 9.7744C16.1935 9.8317 16.2752 9.86035 16.3717 9.86035Z" fill="#FFF700"/>
         </g>
         <defs>
-        <filter id="filter0_d_4_20" x="0" y="0" width="21.058" height="14.8707" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        <filter id="filter0_d_4_20" x="0" y="0" width="21.058" height="14.8707" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+        <feFlood floodOpacity="0" result="BackgroundImageFix"/>
         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
         <feOffset dy="4"/>
         <feGaussianBlur stdDeviation="2"/>
@@ -22,8 +22,8 @@ export default function Logo(props) {
         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_4_20"/>
         <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_4_20" result="shape"/>
         </filter>
-        <filter id="filter1_d_4_20" x="2.52197" y="6.89593" width="16.7814" height="6.75306" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        <filter id="filter1_d_4_20" x="2.52197" y="6.89593" width="16.7814" height="6.75306" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+        <feFlood floodOpacity="0" result="BackgroundImageFix"/>
         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
         <feOffset dy="1.5"/>
         <feGaussianBlur stdDeviation="0.850679"/>
@@ -32,8 +32,8 @@ export default function Logo(props) {
         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_4_20"/>
         <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_4_20" result="shape"/>
         </filter>
-        <filter id="filter2_d_4_20" x="2.52197" y="7.81531" width="10.4412" height="5.88855" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        <filter id="filter2_d_4_20" x="2.52197" y="7.81531" width="10.4412" height="5.88855" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+        <feFlood floodOpacity="0" result="BackgroundImageFix"/>
         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
         <feOffset dy="1.70136"/>
         <feGaussianBlur stdDeviation="0.850679"/>

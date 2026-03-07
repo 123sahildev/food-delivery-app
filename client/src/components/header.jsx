@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import Logo from '../assets/logo.jsx'
 import Cart from '../assets/svgs/cart.jsx'
 import Search from "../assets/svgs/search.jsx";
-export default function header({setRegister}) {
+export default function header({setRegister, setLogin}) {
 
 
 
@@ -20,7 +20,7 @@ export default function header({setRegister}) {
       <Search className="text-white w-6 h-6 self-center  " />
       </button>
       <div className="flex items-center absolute right-40 gap-3">
-        <button className="font-[Arial] text-[16px] text-white px-4 py-1 rounded-[5px] outline outline-[#ff9900] border-none transition-all duration-300  hover:shadow-[0px_0px_3px_1px_rgb(255,153,0)] hover:text-[#fff45a] hover:outline-2 cursor-pointer">Login</button>
+        <button onClick={() => setLogin(true)} className="font-[Arial] text-[16px] text-white px-4 py-1 rounded-[5px] outline outline-[#ff9900] border-none transition-all duration-300  hover:shadow-[0px_0px_3px_1px_rgb(255,153,0)] hover:text-[#fff45a] hover:outline-2 cursor-pointer">Login</button>
         <button onClick={() => setRegister(true)} className="font-[Arial] text-[16px] text-white py-1 rounded-[5px] hover:bg-[#ff8800] bg-[rgb(255,153,0)] transition-all duration-300 px-4 border-none cursor-pointer ">Sign up</button>
       </div>
     </div>
