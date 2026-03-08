@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+
+@theme {
+    --breakpoint-*: initial;
+      
+}
+
+
 @keyframes button-bounce {
     from {
         transform: scale(1);

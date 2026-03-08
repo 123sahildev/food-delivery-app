@@ -8,7 +8,6 @@ export default function header({setRegister, setLogin}) {
 
   return (
     <div className="absolute top-0 left-0 w-full h-17 flex flex-row items-center justify-center gap-4">
-      <Logo  className="absolute self-center left-3 translate-y-2 w-25 h-25 " />
       <div className=" group cursor-pointer absolute items-center justify-center right-10 self-center">
         <p className="justify-self-center trasform translate-x-1 font-bold absolute text-[20px] font-[Arial] text-[#ffe600]">0</p>
         <Cart className="group-hover:text-[#efeeee] self-center h-16 w-16 text-white" />

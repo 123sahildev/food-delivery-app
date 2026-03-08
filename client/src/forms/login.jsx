@@ -25,27 +25,44 @@ export default function login({ setRegister, setLogin }) {
                 <label htmlFor="email">Email</label>
                 <div className="rounded-[5px] flex flex-row items-center outline outline-[darkorange]">
                     <EmailIcon className="text-[darkorange] w-5 h-5 ml-1" /> 
-                    <input {...register("email")}
+                    <input {...register("email",
+                        {
+                            required : "please enter the email",
+                            minLength : {
+                                value : 12,
+                                message : "email lenth can't be less than 12"
+                            }
+                        }
+                    )}
                     type="email" 
                     id="email"
                     className="w-62 h-8 px-2 border-none outline-none text-[15px]"/>
                 </div>
             </div>
+            {errors.email  && <small className="text-[red] ml-2 mt-1 text-[10px]">{errors.email?.message}</small>}
             <div className="flex mt-2 flex-col w-min h-auto self-center ">
                 <label htmlFor="password">Password</label>
                 <div className="rounded-[5px] items-center flex flex-row outline outline-[darkorange]">
                     <PasswordIcon className="w-5 h-5 text-[darkorange] ml-1" />
-                    <input {...register("password")} 
+                    <input {...register("password",
+                        {
+                            required : "please enter the password",
+                            minLength : {
+                                value : 9,
+                                message : "password must greater than 9"
+                            }
+                        }
+                    )} 
                     type={password ? "password" : "text"}
                     id="password" 
                     className="w-55 h-8 px-2 border-none outline-none text-[15px]"/>
                     <PasswordShow onClick={() => setPassword(!password)} className="w-6 transition-all duration-300 hover:bg-[#42424211] h-6 mr-1 text-[#303030] rounded-[50%] cursor-pointer p-1 " />
                 </div>
             </div>
-            <div className="flex flex-row mt-2">
-                <input type="checkbox" {...register("rememberMe")} />
-                <label className="text-[13px] ml-1">Remember me</label>
-            </div>
+            {errors.password && <small className="text-[red] mt-1 ml-2 text-[10px]">{errors.password?.message}</small>}
+            <label className="flex flex-row mt-2 text-[13px] items-center ml-1 cursor-pointer">
+            <input type="checkbox" className="mr-1" {...register("rememberMe")} />Remember me
+            </label>
             <button type="submit" className="mt-4 rounded-2xl bg-[#111111] cursor-pointer text-white font-bold hover:outline hover:outline-[darkorange] justify-self-center w-full h-9 border-none">Login</button>
             <div className="flex flex-row self-center mt-3">
                 <p className="text-[13px]">Already have an account?</p>
