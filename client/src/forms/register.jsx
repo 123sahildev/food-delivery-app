@@ -7,8 +7,11 @@ import PasswordShow from "../assets/svgs/passwordShow.jsx";
 import UserName from "../assets/svgs/username.jsx";
 import GoogleIcon from "../assets/svgs/googleIcon.jsx";
 import gsap from 'gsap';
+import { useDispatch, useSelector } from "react-redux";
+import { userRegister } from "../Api/profile.user.js";
 
 export default function Register({setRegister, setLogin}) {
+    const dispatch = useDispatch();
     const { register, handleSubmit, formState : { errors }, reset} = useForm();
     const [hidePassword, setHidePassword] = useState(true);
     const [isMatch, setDoesNotMatch] = useState(false);
@@ -16,6 +19,7 @@ export default function Register({setRegister, setLogin}) {
 
     const submit = (data) => {
         let checkPasswordMatched = data.confirmPassword === data.password;
+        dispatch(userRegister(data));
 
         if (checkPasswordMatched && data.termsConditions ) {
             console.log(data);
@@ -41,12 +45,12 @@ export default function Register({setRegister, setLogin}) {
             setUnChecked(false);
             return;
         }
-        
+
     }
 
   return (
     <div onClick={() => setRegister(false)} className="flex absolute left-0 top-0  bg-[#131313a8] w-screen h-screen">
-         <form onClick={(e) => e.stopPropagation()} onSubmit={handleSubmit(submit)} className="self-center mx-auto px-6 py-3 flex flex-col bg-white rounded-[10px] w-min h-min  ">
+        <form onClick={(e) => e.stopPropagation()} onSubmit={handleSubmit(submit)} className="self-center mx-auto px-6 py-3 flex flex-col bg-white rounded-[10px] w-min h-min  ">
             <div  className=" justify-self-center flex w-max self-center mt-2 flex-col gap-0 items-center justify-items-center">
                 <h1 className="text-[23px] h-8">Create your <span className="inline text-[23px] h-8 text-[darkorange]">Account</span></h1>
                 <small className="text-[darkorange] text-[11px]">Register your account and go to login</small>
@@ -146,7 +150,8 @@ export default function Register({setRegister, setLogin}) {
                 setRegister(false)
             }} className="text-[13px] cursor-pointer hover:border-b hover:border-[darkorange] text-[darkorange] ml-1">Login</p>
         </div>
-         </form>
+        </form>
     </div>
   );
 }
+

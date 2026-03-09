@@ -28,7 +28,7 @@
         filter: saturate(120%);
     }
     .gridentText {
-        background: linear-gradient(-90deg, yellow, white);
+        background: linear-gradient(-90deg, rgb(255, 166, 0), white);
         background-clip: text;
         color: transparent;
     }
