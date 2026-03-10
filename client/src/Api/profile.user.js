@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { userRegisterThunk } from './thunks/userFormThunk';
+import { userRegisterThunk } from './thunks/userFormThunk.js';
 
 export const userProfileThunk = createAsyncThunk(
     "profileUser",
