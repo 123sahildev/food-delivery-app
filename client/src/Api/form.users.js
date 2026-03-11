@@ -18,10 +18,9 @@ export const userProfileThunk = createAsyncThunk(
     }
 );
 
-
 export const userRegister = createAsyncThunk(
     "user/userRegister",
-    async (data) => {
-        return userRegisterThunk(data)
+    (data) => {
+        return userRegisterThunk(data);
     }
-)
+);

@@ -8,7 +8,7 @@ import UserName from "../assets/svgs/username.jsx";
 import GoogleIcon from "../assets/svgs/googleIcon.jsx";
 import gsap from 'gsap';
 import { useDispatch, useSelector } from "react-redux";
-import { userRegister } from "../Api/profile.user.js";
+import { userRegister } from "../Api/form.users.js";
 
 export default function Register({setRegister, setLogin}) {
     const dispatch = useDispatch();
@@ -19,10 +19,11 @@ export default function Register({setRegister, setLogin}) {
 
     const submit = (data) => {
         let checkPasswordMatched = data.confirmPassword === data.password;
-        dispatch(userRegister(data));
+        let { username, email, password} = data;
+
+        dispatch(userRegister({username, email, password}));
 
         if (checkPasswordMatched && data.termsConditions ) {
-            console.log(data);
             reset();
             setRegister(false);
             return;

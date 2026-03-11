@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { userProfileThunk, userRegister } from "../Api/profile.user.js"
+import { userProfileThunk, userRegister } from "../Api/form.users.js"
 
 const userProfileSlice = createSlice({
     name : "userProfile",
     initialState : { data : [], loaders : { registerLoader : true, loginLoader : true}},
     reducers : {
         simple (state) {
-            console.log("chal raha ahi")
+            console.log("chal raha ahi");
         }
     },
 

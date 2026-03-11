@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export const userRegisterThunk = async (data) => {
-    // let response = await axios.post("http://localhost:3000/user/register", data)
-    return data
+    let response = await axios.post("http://localhost:3000/api/users/register", data)
+    return response.data
 }
 
 export const userLoginThunk = async (data) => {
