@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useForm } from 'react-hook-form'
+import { set, useForm } from 'react-hook-form'
 import EmailIcon from "../assets/svgs/email.jsx";
 import PasswordIcon from "../assets/svgs/password.jsx";
 import ConfirmPassword from "../assets/svgs/confirmPassword.jsx";
@@ -7,28 +7,40 @@ import PasswordShow from "../assets/svgs/passwordShow.jsx";
 import UserName from "../assets/svgs/username.jsx";
 import GoogleIcon from "../assets/svgs/googleIcon.jsx";
 import gsap from 'gsap';
-import { useDispatch, useSelector } from "react-redux";
-import { userRegister } from "../Api/form.users.js";
+import axios from "axios";
+// import { userRegister } from "../Api/form.users.js";
 
 export default function Register({setRegister, setLogin}) {
-    const dispatch = useDispatch();
     const { register, handleSubmit, formState : { errors }, reset} = useForm();
     const [hidePassword, setHidePassword] = useState(true);
     const [isMatch, setDoesNotMatch] = useState(false);
     const [isRenderChecked, setUnChecked] = useState(false);
+    const [isEmailExist, setEmailAlreadyExist] = useState(false);
+    const [isLoading, setLoading] = useState(false);
+    
 
-    const submit = (data) => {
+    const submit = async (data) => {
         let checkPasswordMatched = data.confirmPassword === data.password;
         let { username, email, password} = data;
 
-        dispatch(userRegister({username, email, password}));
-
         if (checkPasswordMatched && data.termsConditions ) {
-            reset();
-            setRegister(false);
-            return;
-        }
+            let response = await axios.post("http://localhost:3000/api/users/register", { username, email, password});
+            if (response.data.success === false) {
+                setEmailAlreadyExist(true);
+                setDoesNotMatch(false)
 
+                return;
+            }
+            setEmailAlreadyExist(false);
+            setLoading(true);
+            setDoesNotMatch(false)
+            setTimeout(() => {
+                setLoading(false);
+            }, 2000);
+
+            return 
+        }
+        setEmailAlreadyExist(false);
         if (!checkPasswordMatched && !data.termsConditions) {
             setDoesNotMatch(true);
             setUnChecked(false);
@@ -91,6 +103,7 @@ export default function Register({setRegister, setLogin}) {
                 </div>
             </div>
             {errors.email && <small className="text-[red] text-[10px] mt-1 h-5">{errors.email?.message}</small>}
+            {isEmailExist && <small className="text-[red] text-[10px] mt-1 h-5">Email already exist</small>}
             <div className="flex flex-col mt-2 self-center h-auto">
                 <label htmlFor="password" className="text-[13px]">Password</label>
                 <div className="flex w-min items-center rounded-[5px] outline outline-[#ff3300]">
@@ -133,12 +146,12 @@ export default function Register({setRegister, setLogin}) {
             <div className="mt-2 flex items-center mx-auto">
                 <label  className="text-[12px] cursor-pointer"><input onInput={() => {
                     console.log("ischeck : ", isRenderChecked);
-                    setUnChecked(!isRenderChecked)
+                    setUnChecked(!isRenderChecked);
                     
                 }} type="checkbox" {...register("termsConditions")} className="cursor-pointer"/> I agree to the <span className="text-[13px] text-[darkorange] font-normal"> Terms</span> & <span className="text-[12px] text-[darkorange] font-normal">Conditions</span></label>
             </div>
             {isRenderChecked && <small className="mx-auto text-[red] text-[10px] font-[Arial]">check and agree with terms & conditions</small>}
-            <button type="submit" className="mt-4 w-full cursor-pointer hover:outline hover:outline-[#ff5100] transition-all duration-300 h-9 rounded-2xl mx-auto bg-[#0e0e0e] border-none outline-transparent text-white">Register</button>
+            <button type="submit" disabled={isLoading} className={`mt-4 w-full cursor-pointer hover:outline hover:outline-[#ff5100] transition-all duration-300 h-9  rounded-2xl mx-auto ${ isLoading ? "bg-[#363636] cursor-progress" : "bg-[#000000] cursor-pointer"} border-none outline-transparent text-white`}>Register</button>
             <label className="mt-3 text-[#525252] mx-auto" >----------------- or ------------------</label>
         <div className="mt-2 justify-center py-1 w-[calc(100%-20px)] bg-white outline outline-[#474747] rounded-2xl flex flex-row items-center self-center gap-2">
             <p className="text-[12px] cursor-pointer">Continue with google</p>
@@ -147,8 +160,8 @@ export default function Register({setRegister, setLogin}) {
         <div className="mt-2 flex self-center mb-2">
             <label className="text-[14px]">Already have an account?</label>
             <p onClick={() => {
-                setLogin(true)
-                setRegister(false)
+                setLogin(true);
+                setRegister(false);
             }} className="text-[13px] cursor-pointer hover:border-b hover:border-[darkorange] text-[darkorange] ml-1">Login</p>
         </div>
         </form>

@@ -4,13 +4,18 @@ import { useForm } from "react-hook-form";
 import EmailIcon from "../assets/svgs/email";
 import PasswordIcon from "../assets/svgs/password";
 import PasswordShow from "../assets/svgs/passwordShow";
+import axios from "axios";
 
 export default function login({ setRegister, setLogin }) {
     const { register, handleSubmit, formState : { errors }, reset } = useForm();
     const [password, setPassword] = useState(true);
 
     const submit = async (data) => {
-        console.log(data);
+        let response = await axios.post("http://localhost:3000/api/users/login", data);
+        console.log(response.data);
+        // console.log(data);
+        
+        
     }
 
 
