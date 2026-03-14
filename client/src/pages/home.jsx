@@ -7,6 +7,7 @@ import Hero5 from '../assets/hero5.jpg'
 import Hero6 from '../assets/hero6.jpg'
 import Register from '../forms/register.jsx';
 import Login from "../forms/login.jsx"
+import axios from "axios"
 
 export default function home() {
     const [login, setLogin] = useState(false);
@@ -14,6 +15,24 @@ export default function home() {
     const word = 'Fresh Food, Delivered Fast Order your favorite meals anytime'
     const [title, setTitle] = useState('Fresh Food, Delivered Fast Order your favorite meals anytime');
     const [isanimation, setAnimation] = useState(true);
+
+     useEffect(() => {
+          let token = localStorage.getItem("token");
+          if (!token) return;
+          let auth = async () => {
+            let response = await axios.get("http://localhost:3000/api/users/profile",
+              {
+                headers : {
+                  Authorization : `Bearer ${token}`
+                }
+              }
+            );
+            console.log(response.data)
+          }
+          auth();
+          console.log("token from home.js :", token);
+        }, []);
+
 
   return (
     <>

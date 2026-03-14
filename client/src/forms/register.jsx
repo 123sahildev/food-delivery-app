@@ -17,6 +17,7 @@ export default function Register({setRegister, setLogin}) {
     const [isRenderChecked, setUnChecked] = useState(false);
     const [isEmailExist, setEmailAlreadyExist] = useState(false);
     const [isLoading, setLoading] = useState(false);
+    const [isRegisterSuccessful, setRegisterSuccessful] = useState(false);
     
 
     const submit = async (data) => {
@@ -27,35 +28,41 @@ export default function Register({setRegister, setLogin}) {
             let response = await axios.post("http://localhost:3000/api/users/register", { username, email, password});
             if (response.data.success === false) {
                 setEmailAlreadyExist(true);
-                setDoesNotMatch(false)
-
+                setDoesNotMatch(false);
+                setRegisterSuccessful(false);
                 return;
             }
             setEmailAlreadyExist(false);
+            setRegisterSuccessful(true);
             setLoading(true);
-            setDoesNotMatch(false)
+            setDoesNotMatch(false);
             setTimeout(() => {
                 setLoading(false);
+                setRegisterSuccessful(false);
+
             }, 2000);
 
             return 
         }
-        setEmailAlreadyExist(false);
+        
         if (!checkPasswordMatched && !data.termsConditions) {
             setDoesNotMatch(true);
             setUnChecked(false);
+            setEmailAlreadyExist(false);
             return;
         }
 
         if (checkPasswordMatched && !data.termsConditions) {
             setUnChecked(true);
             setDoesNotMatch(false);
+            setEmailAlreadyExist(false);
             return;
         }
         
         if (data.termsConditions && !checkPasswordMatched) {
             setDoesNotMatch(true);
             setUnChecked(false);
+            setEmailAlreadyExist(false);
             return;
         }
 
@@ -143,6 +150,7 @@ export default function Register({setRegister, setLogin}) {
             </div>
             {errors.confirmPassword && <small className="text-[red] text-[10px] mt-1 h-5">{errors.confirmPassword?.message}</small>}
             {isMatch && <small className="text-[red] text-[10px] mt-1 h-5">Password does'nt matched</small>}
+            {isRegisterSuccessful && <small className="text-[green] text-[12px] mx-auto mt-1 h-5">Registered successful</small>}
             <div className="mt-2 flex items-center mx-auto">
                 <label  className="text-[12px] cursor-pointer"><input onInput={() => {
                     console.log("ischeck : ", isRenderChecked);

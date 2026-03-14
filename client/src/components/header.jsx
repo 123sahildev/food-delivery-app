@@ -2,9 +2,9 @@ import { useEffect, useState, useRef } from "react";
 import Logo from '../assets/logo.jsx'
 import Cart from '../assets/svgs/cart.jsx'
 import Search from "../assets/svgs/search.jsx";
+import Hero from '../assets/hero2.jpg'
+
 export default function header({setRegister, setLogin}) {
-
-
 
   return (
     <div className="absolute top-0 left-0 w-full h-17 flex flex-row items-center justify-center gap-4">
@@ -20,10 +20,9 @@ export default function header({setRegister, setLogin}) {
       <Search className="text-white w-6 h-6 self-center  " />
       </button>
       <div className="flex items-center absolute right-40 gap-3">
-        <button onClick={() => setLogin(true)} className="font-[Arial] text-[16px] text-white px-4 py-1 rounded-[5px] outline outline-[white] border-none transition-all duration-300  hover:shadow-[0px_0px_3px_1px_rgb(255,153,0)] hover:text-[#fff45a] hover:outline cursor-pointer">Login</button>
-        <button onClick={() => setRegister(true)} className="font-[Arial] text-[16px] text-white py-1 rounded-[5px] hover:bg-[#181818] bg-[black] transition-all duration-300 px-4 border-none cursor-pointer ">Sign up</button>
+        <button onClick={() => setLogin(true)} className="font-[Arial] text-[16px] text-white px-4 py-1 rounded-[5px] outline outline-[white] border-none transition-all duration-300  hover:shadow-[0px_0px_3px_1px_rgb(255,153,0)] hover:text-[#fff45a] hover:outline hover:outline-[#fff45a] cursor-pointer">Login</button>
+        <button onClick={() => setRegister(true)} className="font-[Arial] text-[16px] text-white py-1 rounded-[5px] hover:bg-[#000000] hover:text-[#fff45a] bg-[black] transition-all duration-300 px-4 border-none cursor-pointer ">Sign up</button>
       </div>
     </div>
-    
   );
 }

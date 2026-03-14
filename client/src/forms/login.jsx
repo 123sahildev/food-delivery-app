@@ -9,15 +9,22 @@ import axios from "axios";
 export default function login({ setRegister, setLogin }) {
     const { register, handleSubmit, formState : { errors }, reset } = useForm();
     const [password, setPassword] = useState(true);
+    const [isUserNotFound, setUserNotFound] = useState({ render : false, status : true});
 
     const submit = async (data) => {
         let response = await axios.post("http://localhost:3000/api/users/login", data);
         console.log(response.data);
-        // console.log(data);
-        
-        
-    }
+        if (!response.data.success) {
+            if (response.data.message === "user not found") {
+                setUserNotFound({ render: true, status: false});
+            }
+        }
 
+        if (response.data.success) {
+            setUserNotFound({render: true, status: true});
+            localStorage.setItem("token", response.data.token);
+        }
+    }
 
   return (
     <div onClick={() => setLogin(false)} className="w-screen absolute top-0 left-0 flex h-screen bg-[#0f0f0fcc]">
@@ -65,6 +72,7 @@ export default function login({ setRegister, setLogin }) {
                 </div>
             </div>
             {errors.password && <small className="text-[red] mt-1 ml-2 text-[10px]">{errors.password?.message}</small>}
+            {isUserNotFound.render && <small className={`${isUserNotFound.status ? "text-[#04a004]" : "text-[red]"} mt-1 mx-auto text-[13px]`}>{`${isUserNotFound.status ? "Logged in successfully" : "incorrect email or password"}`}</small>}
             <label className="flex flex-row mt-2 text-[13px] items-center ml-1 cursor-pointer">
             <input type="checkbox" className="mr-1" {...register("rememberMe")} />Remember me
             </label>
@@ -72,8 +80,8 @@ export default function login({ setRegister, setLogin }) {
             <div className="flex flex-row self-center mt-3">
                 <p className="text-[13px]">Already have an account?</p>
                 <p onClick={() => {
-                    setLogin(false)
-                    setRegister(true)
+                    setLogin(false);
+                    setRegister(true);
                 }} className="ml-1 text-[darkorange] text-[12px] h-4 cursor-pointer hover:border-b hover:border-[darkorange]">Register</p>
             </div>
         </form>

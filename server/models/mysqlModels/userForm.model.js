@@ -1,9 +1,12 @@
 const connection = require("../../connections/mysql.connection");
+const bcrypt = require("bcrypt");
 
 const userRegisterModel = async (data) => {
     try {
-        let {username, email, password} = data;
-        let [result] = await connection.query("INSERT INTO users (username, email, password) VALUES (?, ?, ?)", [username, email, password]);
+        let {username, email, hashedPassword} = data;
+        console.log("hashedPassword from userForm.model.js :", hashedPassword);
+        let [result] = await connection.query("INSERT INTO users (username, email, password) VALUES (?, ?, ?)", [username, email, hashedPassword]);
+
 
         return {
             success : true,
@@ -26,27 +29,30 @@ const userRegisterModel = async (data) => {
 }
 
 
-
 const userLoginModel = async (data) => {
     try {
-        let {email, password} = data;
-        console.log("form data from userFomr.model.js :", data);
-
-        let [result] = await connection.query("SELECT * FROM users WHERE email = ?", [email]);
+        let { email } = data;
+        let [result] = await connection.query("SELECT * FROM users WHERE email = ? ", [email]);
+        
+        if (result.length > 0) {
+            return {
+                success : true,
+                data : result[0]
+            }
+        }
 
         return {
-            success : true,
-            data : result
+            success : false,
+            message : "user not found"
         };
 
     } catch (error) {
         console.log(error);
         return {
             success : false,
-            message : "user not found"
-        };
+            message : "data base error"
+        }
     }
-
 }
 
 module.exports = {userLoginModel, userRegisterModel};
