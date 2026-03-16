@@ -7,6 +7,7 @@ import Hero5 from '../assets/hero5.jpg'
 import Hero6 from '../assets/hero6.jpg'
 import Register from '../forms/register.jsx';
 import Login from "../forms/login.jsx"
+import HomeSideBar from "../components/homeSideBar.jsx"
 import axios from "axios"
 
 
@@ -16,8 +17,9 @@ export default function home() {
     const word = 'Fresh Food, Delivered Fast Order your favorite meals anytime'
     const [title, setTitle] = useState('Fresh Food, Delivered Fast Order your favorite meals anytime');
     const [isanimation, setAnimation] = useState(true);
+    const [isProfileBar, setProfileBar] = useState(true);
 
-    
+
      useEffect(() => {
           let auth = async () => {
             let response = await axios.get("http://localhost:3000/api/users/profile",
@@ -38,9 +40,11 @@ export default function home() {
       <h1 className="font-[system-ui] font-bold gridentText w-150 text-[40px] ">{title}</h1>
       <button onMouseEnter={() => setAnimation(false)} onMouseLeave={() => setAnimation(true)} className={`${isanimation && "btn-bounce "} border-none font-[Arial] font-bold cursor-pointer outline-none text-[17px] text-white bg-[#ff7b00] h-9 rounded-[7px] mt-2 px-3`}>order now</button>
     </div>
-    <Header setRegister={setRegister} setLogin={setLogin} />
+    <Header setProfileBar={setProfileBar} setRegister={setRegister} setLogin={setLogin} />
     {register && <Register setRegister={setRegister} setLogin={setLogin} />}
     {login && <Login setRegister={setRegister} setLogin={setLogin} />}
+    <HomeSideBar isProfileBar={isProfileBar} setProfileBar={setProfileBar} />
+
     </>
   );
 }
