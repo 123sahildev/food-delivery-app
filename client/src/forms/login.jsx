@@ -12,7 +12,12 @@ export default function login({ setRegister, setLogin }) {
     const [isUserNotFound, setUserNotFound] = useState({ render : false, status : true});
 
     const submit = async (data) => {
-        let response = await axios.post("http://localhost:3000/api/users/login", data);
+        let response = await axios.post("http://localhost:3000/api/users/login",
+            data,
+            {
+                withCredentials: true
+            }
+         );
         console.log(response.data);
         if (!response.data.success) {
             if (response.data.message === "user not found") {
@@ -22,7 +27,6 @@ export default function login({ setRegister, setLogin }) {
 
         if (response.data.success) {
             setUserNotFound({render: true, status: true});
-            localStorage.setItem("token", response.data.token);
         }
     }
 

@@ -9,6 +9,7 @@ import Register from '../forms/register.jsx';
 import Login from "../forms/login.jsx"
 import axios from "axios"
 
+
 export default function home() {
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
@@ -16,21 +17,17 @@ export default function home() {
     const [title, setTitle] = useState('Fresh Food, Delivered Fast Order your favorite meals anytime');
     const [isanimation, setAnimation] = useState(true);
 
+    
      useEffect(() => {
-          let token = localStorage.getItem("token");
-          if (!token) return;
           let auth = async () => {
             let response = await axios.get("http://localhost:3000/api/users/profile",
               {
-                headers : {
-                  Authorization : `Bearer ${token}`
-                }
+                withCredentials: true
               }
             );
             console.log(response.data)
           }
           auth();
-          console.log("token from home.js :", token);
         }, []);
 
 

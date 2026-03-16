@@ -6,7 +6,7 @@ const userLoginAuth = require("../authentication/userLogin.auth");
 routers.get('/profile', userLoginAuth, (req, res) => {
     console.log("authorization :", req.id);
     return res.json({message : "route passed successfully", id: req.id});
-})
+});
 
 routers.post("/register", userRegisterController);
 

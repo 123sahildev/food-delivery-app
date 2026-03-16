@@ -3,10 +3,11 @@ import { userProfileThunk, userRegister } from "../Api/form.users.js"
 
 const userProfileSlice = createSlice({
     name : "userProfile",
-    initialState : { data : [], loaders : { registerLoader : true, loginLoader : true}},
+    initialState : { data: [], user: false, loaders: { registerLoader: true, loginLoader: true}},
     reducers : {
-        simple (state) {
-            console.log("chal raha ahi");
+        setUserRole (state, action) {
+            console.log("setUserRole :", state.user);
+            state.user = true;
         }
     },
 
@@ -34,5 +35,5 @@ const userProfileSlice = createSlice({
     } 
 });
 
-export const { simple } = userProfileSlice.actions;
+export const { setUserRole } = userProfileSlice.actions;
 export default userProfileSlice.reducer;

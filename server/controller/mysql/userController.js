@@ -20,6 +20,12 @@ const userLoginController = async (req, res) => {
         if (checkPassword) {
             let mySecret = process.env.MYSECRETKEY;
             let generatedToken = jwt.sign({ id: result.data.id }, mySecret, {expiresIn : "1m"});
+            res.cookie("token", generatedToken,
+                {
+                    httpOnly: true,
+                    secure: true
+                }
+            );
             return res.json( {
                 success : true,
                 message : "login successful",
