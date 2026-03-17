@@ -2,12 +2,22 @@ import { createSlice } from "@reduxjs/toolkit"
 import { userProfileThunk, userRegister } from "../Api/form.users.js"
 
 const userProfileSlice = createSlice({
-    name : "userProfile",
-    initialState : { data: [], user: false, loaders: { registerLoader: true, loginLoader: true}},
+    name : "userProfileSlice",
+    initialState : { data: [], user: { status: false, username: "", email: ""}, loaders: { registerLoader: true, loginLoader: true}},
     reducers : {
-        setUserRole (state, action) {
-            console.log("setUserRole :", state.user);
-            state.user = true;
+        setUserProfile (state, action) {
+            if (!action.payload.userAccess) {
+                state.user.status = false;
+                return
+            }
+            state.user.status = true;
+            state.user.username = action.payload.data.username;
+            state.user.email = action.payload.data.email;
+        },
+        logoutUser (state, action) {
+            state.user.status = false;
+            state.user.email = "";
+            state.user.username = "";
         }
     },
 
@@ -35,5 +45,5 @@ const userProfileSlice = createSlice({
     } 
 });
 
-export const { setUserRole } = userProfileSlice.actions;
+export const { setUserProfile, logoutUser } = userProfileSlice.actions;
 export default userProfileSlice.reducer;

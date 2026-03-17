@@ -18,7 +18,6 @@ export default function login({ setRegister, setLogin }) {
                 withCredentials: true
             }
          );
-        console.log(response.data);
         if (!response.data.success) {
             if (response.data.message === "user not found") {
                 setUserNotFound({ render: true, status: false});
@@ -86,7 +85,7 @@ export default function login({ setRegister, setLogin }) {
                 <p onClick={() => {
                     setLogin(false);
                     setRegister(true);
-                }} className="ml-1 text-[darkorange] text-[12px] h-4 cursor-pointer hover:border-b hover:border-[darkorange]">Register</p>
+                }} className="ml-1 text-[darkorange] text-[12px] h-fit cursor-pointer hover:border-b hover:border-[darkorange]">Register</p>
             </div>
         </form>
     </div>

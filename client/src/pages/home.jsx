@@ -9,7 +9,8 @@ import Register from '../forms/register.jsx';
 import Login from "../forms/login.jsx"
 import HomeSideBar from "../components/homeSideBar.jsx"
 import axios from "axios"
-
+import { setUserProfile } from "../context/userFormSlice.js"
+import { useDispatch } from "react-redux";
 
 export default function home() {
     const [login, setLogin] = useState(false);
@@ -17,9 +18,8 @@ export default function home() {
     const word = 'Fresh Food, Delivered Fast Order your favorite meals anytime'
     const [title, setTitle] = useState('Fresh Food, Delivered Fast Order your favorite meals anytime');
     const [isanimation, setAnimation] = useState(true);
-    const [isProfileBar, setProfileBar] = useState(true);
-
-
+    const [isProfileBar, setProfileBar] = useState(false);
+    const dispatch = useDispatch();
      useEffect(() => {
           let auth = async () => {
             let response = await axios.get("http://localhost:3000/api/users/profile",
@@ -27,11 +27,15 @@ export default function home() {
                 withCredentials: true
               }
             );
-            console.log(response.data)
+            
+            if (response.data.success) {
+                dispatch(setUserProfile({ userAccess: true, data: response.data.data}));
+                return
+            } 
+            dispatch(setUserProfile({userAccess: false}));
           }
           auth();
         }, []);
-
 
   return (
     <>
