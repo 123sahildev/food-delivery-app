@@ -21,11 +21,13 @@ export default function login({ setRegister, setLogin }) {
         if (!response.data.success) {
             if (response.data.message === "user not found") {
                 setUserNotFound({ render: true, status: false});
+                dispatch(setUserProfile({ userAccess: true}));
             }
         }
 
         if (response.data.success) {
             setUserNotFound({render: true, status: true});
+            dispatch(setUserProfile({ userAccess: true, data: response.data.data}));
         }
     }
 
