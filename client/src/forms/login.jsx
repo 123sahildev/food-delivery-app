@@ -5,12 +5,13 @@ import EmailIcon from "../assets/svgs/email";
 import PasswordIcon from "../assets/svgs/password";
 import PasswordShow from "../assets/svgs/passwordShow";
 import axios from "axios";
+import { useDispatch } "react-redux"
 
 export default function login({ setRegister, setLogin }) {
     const { register, handleSubmit, formState : { errors }, reset } = useForm();
     const [password, setPassword] = useState(true);
     const [isUserNotFound, setUserNotFound] = useState({ render : false, status : true});
-
+    const dispatch = useDispatch();
     const submit = async (data) => {
         let response = await axios.post("http://localhost:3000/api/users/login",
             data,
@@ -21,7 +22,7 @@ export default function login({ setRegister, setLogin }) {
         if (!response.data.success) {
             if (response.data.message === "user not found") {
                 setUserNotFound({ render: true, status: false});
-                dispatch(setUserProfile({ userAccess: true}));
+                dispatch(setUserProfile({ userAccess: false}));
             }
         }
 
