@@ -13,16 +13,22 @@ const userRegisterController =  async (req, res) => {
 
 const userLoginController = async (req, res) => {
     let result = await userLoginModel(req.body.email);
-    console.log("data from login userController :", result.data.password);
     
     if (result.success) {
         let checkPassword = await bcrypt.compare(req.body.password, result.data.password);
-        console.log("check passwored compared :", checkPassword);
         
         if (checkPassword) {
-            let mySecret = process.env.MYSECRETKEY;
-            let generatedToken = jwt.sign({ id: result.data.id }, mySecret, { expiresIn: "3m"});
-            res.cookie("token", generatedToken,
+            let ACCESS_SECRET = process.env.ACCESS_SECRET;
+            let REFRESH_SECRET = process.env.REFRESH_SECRET;
+            let generatedRefreshToken = jwt.sign({ id: result.data.id }, REFRESH_SECRET, { expiresIn: "7d"});
+            let generatedAccessToken = jwt.sign(
+                { id: result.data.id },
+                ACCESS_SECRET,
+                { expiresIn: "3m"}
+            )
+
+            let { username, email } = result.data;
+            res.cookie("token", generatedRefreshToken,
                 {
                     httpOnly: true,
                     secure: false
@@ -31,9 +37,11 @@ const userLoginController = async (req, res) => {
             return res.json( {
                 success : true,
                 message : "login successful",
-                token : generatedToken
+                accessToken: generatedAccessToken,
+                data: { username, email}
             });
         }
+
     }
     return res.json({success: false, message: "user not found"});
 
@@ -44,21 +52,31 @@ const userLoginController = async (req, res) => {
 userProfileAccessController = async (req, res) => {
     let result =  await userProfileAccessModel(req.id);
         if (result.success) {
-            return res.json({ success: true, data: result.data});
+            return res.json({ success: true, data: result.data, accessToken: req.accessToken});
         }
         return res.json({success: false});
 }
 
 const userLogoutController = async (req, res) => {
-    console.log("token from cookie :", req.cookies.token);
-    let check = res.clearCookie("token",
-        {
-            httpOnly: true,
-            secure: false
-        }
-    );
-    console.log("clear cookies result check :", check)
-    return res.json({data: check})
+    try {
+        res.clearCookie("token",
+            {
+                httpOnly: true,
+                secure: false
+            }
+        );
+        return res.json({message: "logout successfull!"})
+        
+    } catch (error) {
+        console.log(error);
+        res.json({message: "error logout failed"});
+    
+    }
 }
 
-module.exports = {userLoginController, userRegisterController, userProfileAccessController, userLogoutController};
+module.exports = {
+    userLoginController, 
+    userRegisterController, 
+    userProfileAccessController, 
+    userLogoutController
+};

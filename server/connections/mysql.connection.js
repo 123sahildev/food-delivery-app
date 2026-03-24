@@ -1,9 +1,10 @@
 const mysql = require("mysql2");
+require("dotenv").config();
 
 const pool = mysql.createPool({
     host: "localhost",
     user: "root",
-    password: "123mymysql",
+    password: process.env.MYSQL_PASSWORD,
     database : "food_delivery_app",
     waitForConnections: true,
     connectionLimit: 10

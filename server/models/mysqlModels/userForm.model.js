@@ -29,7 +29,6 @@ const userRegisterModel = async (data) => {
 const userLoginModel = async (email) => {
     try {
         let [result] = await connection.query("SELECT * FROM users WHERE email = ? ", [email]);
-        console.log("result from loginModel.js :", result);
         if (result.length > 0) {
             return {
                 success: true,
@@ -54,6 +53,7 @@ const userLoginModel = async (email) => {
 const userProfileAccessModel = async (id) => {
 
     try {
+        console.log("data from userprofileaccessmodel id:", id)
         let [rows] = await connection.query("SELECT * FROM users WHERE id = ?", [id]);
         if (rows.length > 0) {
             return {success: true, data: rows[0]}

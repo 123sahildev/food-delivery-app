@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useLayoutEffect } from "react"
 import Hero from '../assets/hero2.jpg'
 import Header from "../components/header.jsx"
 import Hero2 from '../assets/hero3.jpg'
@@ -27,6 +27,8 @@ export default function home() {
                 withCredentials: true
               }
             );
+            console.log("home api data:", response.data)
+
             
             if (response.data.success) {
                 dispatch(setUserProfile({ userAccess: true, data: response.data.data}));

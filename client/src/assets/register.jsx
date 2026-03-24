@@ -5,6 +5,7 @@ import PasswordIcon from "../assets/svgs/password.jsx";
 import ConfirmPassword from "../assets/svgs/confirmPassword.jsx";
 import PasswordShow from "../assets/svgs/passwordShow.jsx";
 import UserName from "../assets/svgs/username.jsx";
+import ShowPassword from "./svgs/showPassword.jsx";
 import GoogleIcon from "../assets/svgs/googleIcon.jsx";
 import gsap from 'gsap';
 
@@ -89,7 +90,7 @@ export default function Register({setRegister, setLogin}) {
             <div className="flex flex-col mt-2 self-center h-auto">
                 <label htmlFor="password" className="text-[13px]">Password</label>
                 <div className="flex w-min items-center rounded-[5px] outline outline-[#ff3300]">
-                    <PasswordIcon className="text-[#ff3300] ml-2 w-5 h-5"/>
+                    {/* <PasswordIcon className="text-[#ff3300] ml-2 w-5 h-5"/> */}
                     <input type={`${hidePassword ? "password" : "text"}`}
                     id="password" {...register("password",
                         {
@@ -101,7 +102,7 @@ export default function Register({setRegister, setLogin}) {
                         }
                     )} 
                     className="text-[13px] flex px-2 w-49 border-none h-7 outline-none cursor-pointer" />
-                    <PasswordShow onClick={()=> setHidePassword(!hidePassword)} className="text-[#5b5b5b] w-6 h-6 cursor-pointer duration-300 hover:bg-[#4848481c] rounded-[15px] p-1" />
+                   {/* {hidePassword ?  <ShowPassword onClick={()=> setHidePassword(!hidePassword)} className="text-[#5b5b5b] w-6 h-6 cursor-pointer duration-300 hover:bg-[#4848481c] rounded-[15px] p-1" /> :  <PasswordShow onClick={()=> setHidePassword(!hidePassword)} className="text-[#5b5b5b] w-6 h-6 cursor-pointer duration-300 hover:bg-[#4848481c] rounded-[15px] p-1" />} */}
                 </div>
             </div>
             {errors.password && <small className="text-[red] text-[10px] mt-1 h-5">{errors.password?.message}</small>}

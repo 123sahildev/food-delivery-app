@@ -4,8 +4,10 @@ import { useForm } from "react-hook-form";
 import EmailIcon from "../assets/svgs/email";
 import PasswordIcon from "../assets/svgs/password";
 import PasswordShow from "../assets/svgs/passwordShow";
+import ShowPassword from "../assets/svgs/showPassword.jsx";
 import axios from "axios";
-import { useDispatch } "react-redux"
+import { useDispatch } from "react-redux"
+import { setUserProfile } from "../context/userFormSlice.js";
 
 export default function login({ setRegister, setLogin }) {
     const { register, handleSubmit, formState : { errors }, reset } = useForm();
@@ -21,12 +23,14 @@ export default function login({ setRegister, setLogin }) {
          );
         if (!response.data.success) {
             if (response.data.message === "user not found") {
+                console.log("usernot found")
                 setUserNotFound({ render: true, status: false});
                 dispatch(setUserProfile({ userAccess: false}));
             }
         }
 
         if (response.data.success) {
+            console.log("user found", response.data)
             setUserNotFound({render: true, status: true});
             dispatch(setUserProfile({ userAccess: true, data: response.data.data}));
         }
@@ -74,7 +78,7 @@ export default function login({ setRegister, setLogin }) {
                     type={password ? "password" : "text"}
                     id="password" 
                     className="w-55 h-8 px-2 border-none outline-none text-[15px]"/>
-                    <PasswordShow onClick={() => setPassword(!password)} className="w-6 transition-all duration-300 hover:bg-[#42424211] h-6 mr-1 text-[#303030] rounded-[50%] cursor-pointer p-1 " />
+                    {password ? <ShowPassword onClick={() => setPassword(!password)} className="w-6 transition-all duration-300 hover:bg-[#42424211] h-6 mr-1 text-[#303030] rounded-[50%] cursor-pointer p-1 " /> : <PasswordShow onClick={() => setPassword(!password)} className="w-6 transition-all duration-300 hover:bg-[#42424211] h-6 mr-1 text-[#303030] rounded-[50%] cursor-pointer p-1 " />}
                 </div>
             </div>
             {errors.password && <small className="text-[red] mt-1 ml-2 text-[10px]">{errors.password?.message}</small>}

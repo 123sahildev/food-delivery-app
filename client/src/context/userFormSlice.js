@@ -3,21 +3,25 @@ import { userProfileThunk, userRegister } from "../Api/form.users.js"
 
 const userProfileSlice = createSlice({
     name : "userProfileSlice",
-    initialState : { data: [], user: { status: false, username: "", email: ""}, loaders: { registerLoader: true, loginLoader: true}},
+    initialState : { data: [], user: { status: false, username: "", email: "", accessToken: ""}, loaders: { registerLoader: true, loginLoader: true}},
     reducers : {
         setUserProfile (state, action) {
             if (!action.payload.userAccess) {
                 state.user.status = false;
+                console.log("setprofile false:", action.payload);
                 return
             }
+            console.log("set profile true:", action.payload)
             state.user.status = true;
             state.user.username = action.payload.data.username;
             state.user.email = action.payload.data.email;
+            state.user.accessToken = action.payload.data.accessToken
         },
         logoutUser (state, action) {
             state.user.status = false;
             state.user.email = "";
             state.user.username = "";
+            state.user.accessToken = "";
         }
     },
 
